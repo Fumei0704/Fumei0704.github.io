@@ -1,63 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const slideTrack = document.querySelector('.carousel-slide');
-    const slides = document.querySelectorAll('.slide');
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
-    const dots = document.querySelectorAll('.dot');
+    const bgBtn = document.getElementById('change-bg-btn');
+    
+    // 定義幾組好看的背景顏色 (Hex 色碼)
+    const colors = [
+        '#f0f4f8', // 淡藍灰
+        '#e8f5e9', // 淡綠色
+        '#fff3e0', // 暖橙色
+        '#f3e5f5', // 淡粉紫
+        '#1e1e2e'  # 深色模式
+    ];
+    
+    let colorIndex = 0;
 
-    let currentIndex = 0;
-    const totalSlides = slides.length;
-    let autoPlayTimer = null;
-
-    // 更新輪播位置與指示點狀態
-    function updateCarousel() {
-        // 移動軌道
-        slideTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
-
-        // 更新圓點 active 狀態
-        dots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentIndex);
-        });
-    }
-
-    // 切換到下一張
-    function nextSlide() {
-        currentIndex = (currentIndex + 1) % totalSlides;
-        updateCarousel();
-    }
-
-    // 切換到上一張
-    function prevSlide() {
-        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-        updateCarousel();
-    }
-
-    // 重設自動播放定時器
-    function resetAutoPlay() {
-        clearInterval(autoPlayTimer);
-        autoPlayTimer = setInterval(nextSlide, 4000); // 4000 毫秒 (4 秒) 自動換頁
-    }
-
-    // 綁定按鈕點擊事件
-    nextBtn.addEventListener('click', () => {
-        nextSlide();
-        resetAutoPlay();
+    bgBtn.addEventListener('click', () => {
+        // 輪流切換陣列中的背景顏色
+        colorIndex = (colorIndex + 1) % colors.length;
+        document.body.style.backgroundColor = colors[colorIndex];
     });
-
-    prevBtn.addEventListener('click', () => {
-        prevSlide();
-        resetAutoPlay();
-    });
-
-    // 綁定指示點點擊事件
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-            currentIndex = index;
-            updateCarousel();
-            resetAutoPlay();
-        });
-    });
-
-    // 啟動自動播放
-    resetAutoPlay();
 });
