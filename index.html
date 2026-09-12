@@ -12,13 +12,14 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
 
-        /* 單色低飽和度暖灰/奶茶背景 (極簡質感色) */
+        /* 預設背景顏色與平滑過渡動畫 */
         body {
-            background-color: #EFECE6;
+            background-color: #EFECE6; /* 預設第一張圖片背景 */
             color: #2c3e50;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            transition: background-color 0.6s ease; /* 換頁時背景顏色平滑漸變 */
         }
 
         /* 頂部無邊框選單 */
@@ -109,11 +110,10 @@
         .carousel-slide {
             display: flex;
             height: 100%;
-            /* 平滑移動動畫 */
             transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* 當需要直接跳頁（不上動畫）時套用此 Class */
+        /* 當無縫直接跳頁時暫停動畫 */
         .carousel-slide.no-transition {
             transition: none !important;
         }
@@ -251,13 +251,40 @@
             <div class="text-container">
                 <h1>特別感謝</h1>
                 <p>繪師</p>
-                <p>共同委託名單</p>
-                <p>文字頁面</p>
+                <p>委託名單</p>
             </div>
         </section>
     </main>
 
     <script>
+        // 24 張圖片對應的低飽和度背景色列表（您可以隨時更改裡面的色碼）
+        const backgroundColors = [
+            "#EFECE6", // 圖片 1：溫暖奶茶
+            "#E6EBE0", // 圖片 2：淡雅鼠尾草綠
+            "#EDF2F4", // 圖片 3：霧藍灰
+            "#F4EAD4", // 圖片 4：柔和燕麥色
+            "#F0E6EF", // 圖片 5：淡淡粉紫
+            "#E2ECE9", // 圖片 6：薄荷灰綠
+            "#EAE4E9", // 圖片 7：淡玫瑰灰
+            "#FFF1E6", // 圖片 8：暖杏色
+            "#FDE2E4", // 圖片 9：柔粉色
+            "#DBE7E4", // 圖片 10：莫蘭迪綠
+            "#E4C1F9", // 圖片 11：淡紫
+            "#D6E2E9", // 圖片 12：莫蘭迪藍
+            "#E9ECEF", // 圖片 13：極簡淺灰
+            "#F3E9DC", // 圖片 14：暖砂色
+            "#D8E2DC", // 圖片 15：灰綠色
+            "#FFE5D9", // 圖片 16：蜜桃粉
+            "#ECE4DB", // 圖片 17：木質灰
+            "#E0E1DD", // 圖片 18：石灰藍
+            "#F1FAEE", // 圖片 19：蛋白綠
+            "#E8D8CE", // 圖片 20：淺駝色
+            "#DFE7FD", // 圖片 21：天藍灰
+            "#F0F3F4", // 圖片 22：雲霧白
+            "#EAD7D7", // 圖片 23：藕粉灰
+            "#DCE1E3"  // 圖片 24：冷灰
+        ];
+
         function switchPage(pageName) {
             const pages = document.querySelectorAll('.page-content');
             const buttons = document.querySelectorAll('.nav-btn');
@@ -276,6 +303,11 @@
 
         let currentIndex = 0;
 
+        function updateBackgroundColor() {
+            // 依據當前圖片索引更新背景顏色
+            document.body.style.backgroundColor = backgroundColors[currentIndex];
+        }
+
         function moveSlide(direction) {
             const slideTrack = document.getElementById('carouselSlide');
             const slides = document.querySelectorAll('.slide-item');
@@ -283,32 +315,33 @@
 
             let nextIndex = currentIndex + direction;
 
-            // 判斷是否需要「直接切換（無視過渡動畫）」
+            // 判斷是否無縫循環切換
             const isLooping = (nextIndex < 0 || nextIndex >= totalSlides);
 
             if (isLooping) {
-                // 1. 關閉滑動動畫
                 slideTrack.classList.add('no-transition');
 
-                // 2. 計算環狀目標位置
                 if (nextIndex < 0) {
                     currentIndex = totalSlides - 1;
                 } else if (nextIndex >= totalSlides) {
                     currentIndex = 0;
                 }
 
-                // 3. 瞬間移動到指定位置
                 slideTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
 
-                // 4. 強制瀏覽器重繪後，把動畫開回來
-                void slideTrack.offsetWidth;
+                void slideTrack.offsetWidth; // 重繪
                 slideTrack.classList.remove('no-transition');
             } else {
-                // 一般正常滑動
                 currentIndex = nextIndex;
                 slideTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
             }
+
+            // 同步更新背景顏色
+            updateBackgroundColor();
         }
+
+        // 初始化背景色
+        updateBackgroundColor();
     </script>
 </body>
 </html>
