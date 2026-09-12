@@ -1,29 +1,29 @@
-// 24 張圖片對應的低飽和度背景色列表
+// 24 張圖片對應的背景色列表（支援單色與漸層色）
 const backgroundColors = [
-    "#EFECE6",
-    "#E6EBE0",
-    "#EDF2F4",
-    "#F4EAD4",
-    "#F0E6EF",
-    "#E2ECE9",
-    "#EAE4E9",
-    "#FFF1E6",
-    "#FDE2E4",
-    "#DBE7E4",
-    "#E4C1F9",
-    "#D6E2E9",
-    "#E9ECEF",
-    "#F3E9DC",
-    "#D8E2DC",
-    "#FFE5D9",
-    "#ECE4DB",
-    "#E0E1DD",
-    "#F1FAEE",
-    "#E8D8CE",
-    "#DFE7FD",
-    "#F0F3F4",
-    "#EAD7D7",
-    "#DCE1E3"
+    "linear-gradient(135deg, #EFECE6 0%, #E6EBE0 100%)", // 圖片 1：暖奶茶漸柔綠
+    "linear-gradient(135deg, #E6EBE0 0%, #EDF2F4 100%)", // 圖片 2：淡綠漸莫蘭迪藍
+    "linear-gradient(135deg, #EDF2F4 0%, #F4EAD4 100%)", // 圖片 3：霧藍漸燕麥色
+    "linear-gradient(135deg, #F4EAD4 0%, #F0E6EF 100%)", // 圖片 4：燕麥漸柔粉紫
+    "linear-gradient(135deg, #F0E6EF 0%, #E2ECE9 100%)", // 圖片 5：柔粉紫漸薄荷灰
+    "linear-gradient(135deg, #E2ECE9 0%, #EAE4E9 100%)", // 圖片 6：薄荷灰漸玫瑰灰
+    "linear-gradient(135deg, #EAE4E9 0%, #FFF1E6 100%)", // 圖片 7：玫瑰灰漸暖杏色
+    "linear-gradient(135deg, #FFF1E6 0%, #FDE2E4 100%)", // 圖片 8：暖杏漸柔粉色
+    "linear-gradient(135deg, #FDE2E4 0%, #DBE7E4 100%)", // 圖片 9：柔粉漸莫蘭迪綠
+    "linear-gradient(135deg, #DBE7E4 0%, #E4C1F9 100%)", // 圖片 10：莫蘭迪綠漸淡紫
+    "linear-gradient(135deg, #E4C1F9 0%, #D6E2E9 100%)", // 圖片 11：淡紫漸莫蘭迪藍
+    "linear-gradient(135deg, #D6E2E9 0%, #E9ECEF 100%)", // 圖片 12：莫蘭迪藍漸極簡灰
+    "linear-gradient(135deg, #E9ECEF 0%, #F3E9DC 100%)", // 圖片 13：極簡灰漸暖砂色
+    "linear-gradient(135deg, #F3E9DC 0%, #D8E2DC 100%)", // 圖片 14：暖砂漸灰綠色
+    "linear-gradient(135deg, #D8E2DC 0%, #FFE5D9 100%)", // 圖片 15：灰綠漸蜜桃粉
+    "linear-gradient(135deg, #FFE5D9 0%, #ECE4DB 100%)", // 圖片 16：蜜桃粉漸木質灰
+    "linear-gradient(135deg, #ECE4DB 0%, #E0E1DD 100%)", // 圖片 17：木質灰漸石灰藍
+    "linear-gradient(135deg, #E0E1DD 0%, #F1FAEE 100%)", // 圖片 18：石灰藍漸蛋白綠
+    "linear-gradient(135deg, #F1FAEE 0%, #E8D8CE 100%)", // 圖片 19：蛋白綠漸淺駝色
+    "linear-gradient(135deg, #E8D8CE 0%, #DFE7FD 100%)", // 圖片 20：淺駝漸天藍灰
+    "linear-gradient(135deg, #DFE7FD 0%, #F0F3F4 100%)", // 圖片 21：天藍灰漸雲霧白
+    "linear-gradient(135deg, #F0F3F4 0%, #EAD7D7 100%)", // 圖片 22：雲霧白漸藕粉灰
+    "linear-gradient(135deg, #EAD7D7 0%, #DCE1E3 100%)", // 圖片 23：藕粉灰漸冷灰
+    "linear-gradient(135deg, #DCE1E3 0%, #EFECE6 100%)"  // 圖片 24：冷灰漸暖奶茶
 ];
 
 function switchPage(pageName) {
@@ -86,11 +86,12 @@ function getRealIndex() {
 }
 
 /* =========================
-   更新背景色
+   更新背景色（改為支援漸層與單色）
 ========================= */
 
 function updateBackgroundColor() {
-    document.body.style.backgroundColor = backgroundColors[getRealIndex()];
+    // 改用 .background 以全面支援漸層語法 (linear-gradient)
+    document.body.style.background = backgroundColors[getRealIndex()];
 }
 
 /* =========================
@@ -98,7 +99,6 @@ function updateBackgroundColor() {
 ========================= */
 
 function moveSlide(direction) {
-    /* 動畫還沒結束時不接受下一次操作，防止 index 跑掉 */
     if (isAnimating) {
         return;
     }
@@ -116,21 +116,17 @@ function moveSlide(direction) {
 ========================= */
 
 slideTrack.addEventListener('transitionend', (event) => {
-    /* 只監聽 transform 動畫 */
     if (event.propertyName !== 'transform') {
         return;
     }
 
-    /* 24 → 假 1：動畫結束後瞬間跳到真正的 1 */
     if (currentIndex === totalSlides + 1) {
         slideTrack.classList.add('no-transition');
         currentIndex = 1;
         slideTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
         void slideTrack.offsetWidth;
         slideTrack.classList.remove('no-transition');
-    }
-    /* 1 → 假 24：動畫結束後瞬間跳到真正的 24 */
-    else if (currentIndex === 0) {
+    } else if (currentIndex === 0) {
         slideTrack.classList.add('no-transition');
         currentIndex = totalSlides;
         slideTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
@@ -139,8 +135,6 @@ slideTrack.addEventListener('transitionend', (event) => {
     }
 
     updateBackgroundColor();
-
-    /* 動畫結束，重新允許操作 */
     isAnimating = false;
 });
 
@@ -165,17 +159,12 @@ carouselViewport.addEventListener('touchend', (event) => {
     const deltaX = touchEndX - touchStartX;
     const deltaY = touchEndY - touchStartY;
 
-    /* 至少滑動 50px 才判定為有效手勢 */
     const swipeThreshold = 50;
 
-    /* 水平距離必須大於 50px 且大於垂直距離，避免上下滑頁面時誤切圖片 */
     if (Math.abs(deltaX) > swipeThreshold && Math.abs(deltaX) > Math.abs(deltaY)) {
-        /* 往左滑 → 下一張 */
         if (deltaX < 0) {
             moveSlide(1);
-        }
-        /* 往右滑 → 上一張 */
-        else {
+        } else {
             moveSlide(-1);
         }
     }
