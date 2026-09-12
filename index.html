@@ -88,7 +88,7 @@
             opacity: 1;
         }
 
-        /* 1. 圖片輪換頁面（無邊框大圖設計） */
+        /* 圖片輪換頁面 */
         #gallery-page {
             position: relative;
             width: 100%;
@@ -125,7 +125,7 @@
             max-height: 100%;
             width: auto;
             height: auto;
-            object-fit: contain; /* 完整呈現圖片原貌不被強制裁切 */
+            object-fit: contain;
             display: block;
         }
 
@@ -157,7 +157,7 @@
         .arrow-prev { left: 2%; }
         .arrow-next { right: 2%; }
 
-        /* 2. 文字頁面 */
+        /* 文字頁面 */
         #text-page {
             justify-content: center;
             align-items: center;
@@ -207,15 +207,127 @@
 
             <div class="carousel-viewport">
                 <div class="carousel-slide" id="carouselSlide">
+                    
+                    <!-- 圖片 1 -->
                     <div class="slide-item">
-                        <img src="https://picsum.photos/id/1015/1400/900" alt="展示圖片 1">
+                        <img src="images/photo1.jpg" alt="圖片 1">
                     </div>
+
+                    <!-- 圖片 2 -->
                     <div class="slide-item">
-                        <img src="https://picsum.photos/id/1018/1400/900" alt="展示圖片 2">
+                        <img src="images/photo2.jpg" alt="圖片 2">
                     </div>
+
+                    <!-- 圖片 3 -->
                     <div class="slide-item">
-                        <img src="https://picsum.photos/id/1019/1400/900" alt="展示圖片 3">
+                        <img src="images/photo3.jpg" alt="圖片 3">
                     </div>
+
+                    <!-- 圖片 4 -->
+                    <div class="slide-item">
+                        <img src="images/photo4.jpg" alt="圖片 4">
+                    </div>
+
+                    <!-- 圖片 5 -->
+                    <div class="slide-item">
+                        <img src="images/photo5.jpg" alt="圖片 5">
+                    </div>
+
+                    <!-- 圖片 6 -->
+                    <div class="slide-item">
+                        <img src="images/photo6.jpg" alt="圖片 6">
+                    </div>
+
+                    <!-- 圖片 7 -->
+                    <div class="slide-item">
+                        <img src="images/photo7.jpg" alt="圖片 7">
+                    </div>
+
+                    <!-- 圖片 8 -->
+                    <div class="slide-item">
+                        <img src="images/photo8.jpg" alt="圖片 8">
+                    </div>
+
+                    <!-- 圖片 9 -->
+                    <div class="slide-item">
+                        <img src="images/photo9.jpg" alt="圖片 9">
+                    </div>
+
+                    <!-- 圖片 10 -->
+                    <div class="slide-item">
+                        <img src="images/photo10.jpg" alt="圖片 10">
+                    </div>
+
+                    <!-- 圖片 11 -->
+                    <div class="slide-item">
+                        <img src="images/photo11.jpg" alt="圖片 11">
+                    </div>
+
+                    <!-- 圖片 12 -->
+                    <div class="slide-item">
+                        <img src="images/photo12.jpg" alt="圖片 12">
+                    </div>
+
+                    <!-- 圖片 13 -->
+                    <div class="slide-item">
+                        <img src="images/photo13.jpg" alt="圖片 13">
+                    </div>
+
+                    <!-- 圖片 14 -->
+                    <div class="slide-item">
+                        <img src="images/photo14.jpg" alt="圖片 14">
+                    </div>
+
+                    <!-- 圖片 15 -->
+                    <div class="slide-item">
+                        <img src="images/photo15.jpg" alt="圖片 15">
+                    </div>
+
+                    <!-- 圖片 16 -->
+                    <div class="slide-item">
+                        <img src="images/photo16.jpg" alt="圖片 16">
+                    </div>
+
+                    <!-- 圖片 17 -->
+                    <div class="slide-item">
+                        <img src="images/photo17.jpg" alt="圖片 17">
+                    </div>
+
+                    <!-- 圖片 18 -->
+                    <div class="slide-item">
+                        <img src="images/photo18.jpg" alt="圖片 18">
+                    </div>
+
+                    <!-- 圖片 19 -->
+                    <div class="slide-item">
+                        <img src="images/photo19.jpg" alt="圖片 19">
+                    </div>
+
+                    <!-- 圖片 20 -->
+                    <div class="slide-item">
+                        <img src="images/photo20.jpg" alt="圖片 20">
+                    </div>
+
+                    <!-- 圖片 21 -->
+                    <div class="slide-item">
+                        <img src="images/photo21.jpg" alt="圖片 21">
+                    </div>
+
+                    <!-- 圖片 22 -->
+                    <div class="slide-item">
+                        <img src="images/photo22.jpg" alt="圖片 22">
+                    </div>
+
+                    <!-- 圖片 23 -->
+                    <div class="slide-item">
+                        <img src="images/photo23.jpg" alt="圖片 23">
+                    </div>
+
+                    <!-- 圖片 24 -->
+                    <div class="slide-item">
+                        <img src="images/photo24.jpg" alt="圖片 24">
+                    </div>
+
                 </div>
             </div>
 
@@ -250,10 +362,12 @@
         }
 
         let currentIndex = 0;
-        const totalSlides = 3;
 
         function moveSlide(direction) {
-            const slide = document.getElementById('carouselSlide');
+            const slideTrack = document.getElementById('carouselSlide');
+            const slides = document.querySelectorAll('.slide-item');
+            const totalSlides = slides.length;
+
             currentIndex += direction;
 
             if (currentIndex < 0) {
@@ -262,7 +376,7 @@
                 currentIndex = 0;
             }
 
-            slide.style.transform = `translateX(-${currentIndex * 100}%)`;
+            slideTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
         }
     </script>
 </body>
