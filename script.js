@@ -1,29 +1,29 @@
-// 24 張圖片對應的背景色列表（支援單色與漸層色）
+// 24 張圖片對應的背景色列表（由中心向外放射狀漸層，飽和度較高）
 const backgroundColors = [
-    "linear-gradient(135deg, #EFECE6 0%, #E6EBE0 100%)", // 圖片 1：暖奶茶漸柔綠
-    "linear-gradient(135deg, #E6EBE0 0%, #EDF2F4 100%)", // 圖片 2：淡綠漸莫蘭迪藍
-    "linear-gradient(135deg, #EDF2F4 0%, #F4EAD4 100%)", // 圖片 3：霧藍漸燕麥色
-    "linear-gradient(135deg, #F4EAD4 0%, #F0E6EF 100%)", // 圖片 4：燕麥漸柔粉紫
-    "linear-gradient(135deg, #F0E6EF 0%, #E2ECE9 100%)", // 圖片 5：柔粉紫漸薄荷灰
-    "linear-gradient(135deg, #E2ECE9 0%, #EAE4E9 100%)", // 圖片 6：薄荷灰漸玫瑰灰
-    "linear-gradient(135deg, #EAE4E9 0%, #FFF1E6 100%)", // 圖片 7：玫瑰灰漸暖杏色
-    "linear-gradient(135deg, #FFF1E6 0%, #FDE2E4 100%)", // 圖片 8：暖杏漸柔粉色
-    "linear-gradient(135deg, #FDE2E4 0%, #DBE7E4 100%)", // 圖片 9：柔粉漸莫蘭迪綠
-    "linear-gradient(135deg, #DBE7E4 0%, #E4C1F9 100%)", // 圖片 10：莫蘭迪綠漸淡紫
-    "linear-gradient(135deg, #E4C1F9 0%, #D6E2E9 100%)", // 圖片 11：淡紫漸莫蘭迪藍
-    "linear-gradient(135deg, #D6E2E9 0%, #E9ECEF 100%)", // 圖片 12：莫蘭迪藍漸極簡灰
-    "linear-gradient(135deg, #E9ECEF 0%, #F3E9DC 100%)", // 圖片 13：極簡灰漸暖砂色
-    "linear-gradient(135deg, #F3E9DC 0%, #D8E2DC 100%)", // 圖片 14：暖砂漸灰綠色
-    "linear-gradient(135deg, #D8E2DC 0%, #FFE5D9 100%)", // 圖片 15：灰綠漸蜜桃粉
-    "linear-gradient(135deg, #FFE5D9 0%, #ECE4DB 100%)", // 圖片 16：蜜桃粉漸木質灰
-    "linear-gradient(135deg, #ECE4DB 0%, #E0E1DD 100%)", // 圖片 17：木質灰漸石灰藍
-    "linear-gradient(135deg, #E0E1DD 0%, #F1FAEE 100%)", // 圖片 18：石灰藍漸蛋白綠
-    "linear-gradient(135deg, #F1FAEE 0%, #E8D8CE 100%)", // 圖片 19：蛋白綠漸淺駝色
-    "linear-gradient(135deg, #E8D8CE 0%, #DFE7FD 100%)", // 圖片 20：淺駝漸天藍灰
-    "linear-gradient(135deg, #DFE7FD 0%, #F0F3F4 100%)", // 圖片 21：天藍灰漸雲霧白
-    "linear-gradient(135deg, #F0F3F4 0%, #EAD7D7 100%)", // 圖片 22：雲霧白漸藕粉灰
-    "linear-gradient(135deg, #EAD7D7 0%, #DCE1E3 100%)", // 圖片 23：藕粉灰漸冷灰
-    "linear-gradient(135deg, #DCE1E3 0%, #EFECE6 100%)"  // 圖片 24：冷灰漸暖奶茶
+    "radial-gradient(circle at center, #F7DFB0 0%, #D4A373 100%)", // 圖片 1：溫暖金杏
+    "radial-gradient(circle at center, #CDEAC0 0%, #7CB518 100%)", // 圖片 2：鮮活草綠
+    "radial-gradient(circle at center, #C8E7F5 0%, #5B92E5 100%)", // 圖片 3：湛藍湖水
+    "radial-gradient(circle at center, #FEE3B8 0%, #F1A208 100%)", // 圖片 4：亮麗琥珀
+    "radial-gradient(circle at center, #F3C4FB 0%, #B5179E 100%)", // 圖片 5：霓光淡紫
+    "radial-gradient(circle at center, #B8F2E6 0%, #38B000 100%)", // 圖片 6：清爽翡翠
+    "radial-gradient(circle at center, #FFCBF2 0%, #F72585 100%)", // 圖片 7：甜美玫紅
+    "radial-gradient(circle at center, #FFE5EC 0%, #FB6F92 100%)", // 圖片 8：繽紛珊瑚粉
+    "radial-gradient(circle at center, #E0AFA0 0%, #8A5A44 100%)", // 圖片 9：濃郁赤陶
+    "radial-gradient(circle at center, #D8F3DC 0%, #52B788 100%)", // 圖片 10：活力深綠
+    "radial-gradient(circle at center, #E1BEE7 0%, #8E24AA 100%)", // 圖片 11：夢幻紫色
+    "radial-gradient(circle at center, #BEE3F8 0%, #3182CE 100%)", // 圖片 12：海洋湛藍
+    "radial-gradient(circle at center, #E2E8F0 0%, #64748B 100%)", // 圖片 13：質感岩藍
+    "radial-gradient(circle at center, #FDE2E4 0%, #E07A5F 100%)", // 圖片 14：暖陽橙紅
+    "radial-gradient(circle at center, #CCD5AE 0%, #6B705C 100%)", // 圖片 15：橄欖綠
+    "radial-gradient(circle at center, #FFD6A5 0%, #FF9F1C 100%)", // 圖片 16：鮮明亮橙
+    "radial-gradient(circle at center, #E9D8A6 0%, #EE9B00 100%)", // 圖片 17：熾黃藤黃
+    "radial-gradient(circle at center, #94D2BD 0%, #0A9396 100%)", // 圖片 18：熱帶孔雀綠
+    "radial-gradient(circle at center, #E8AEB7 0%, #B80046 100%)", // 圖片 19：緋紅玫瑰
+    "radial-gradient(circle at center, #DDA15E 0%, #BC6C25 100%)", // 圖片 20：焦糖焦茶
+    "radial-gradient(circle at center, #C77DFF 0%, #7B2CBF 100%)", // 圖片 21：艷麗深紫
+    "radial-gradient(circle at center, #E0FAFF 0%, #00B4D8 100%)", // 圖片 22：明亮天藍
+    "radial-gradient(circle at center, #F4ACB7 0%, #9D8189 100%)", // 圖片 23：煙燻粉紫
+    "radial-gradient(circle at center, #E0E1DD 0%, #415A77 100%)"  // 圖片 24：深蔚藍灰
 ];
 
 function switchPage(pageName) {
@@ -86,11 +86,10 @@ function getRealIndex() {
 }
 
 /* =========================
-   更新背景色（改為支援漸層與單色）
+   更新背景色（Radial Gradient 中心向外擴散）
 ========================= */
 
 function updateBackgroundColor() {
-    // 改用 .background 以全面支援漸層語法 (linear-gradient)
     document.body.style.background = backgroundColors[getRealIndex()];
 }
 
