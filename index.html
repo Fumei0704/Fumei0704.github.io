@@ -3,40 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的第一個 GitHub Pages 網站</title>
+    <title>圖片輪播範例 - GitHub Pages</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- 頁首與導覽列 -->
-    <header>
-        <div class="logo">MyWebsite</div>
-        <nav>
-            <ul>
-                <li><a href="#home">首頁</a></li>
-                <li><a href="#about">關於我</a></li>
-                <li><a href="#contact">聯絡我</a></li>
-            </ul>
-        </nav>
-    </header>
+    <main class="container">
+        <h1>精選圖片輪播</h1>
 
-    <!-- 主視覺 Banner -->
-    <section id="home" class="hero">
-        <h1>歡迎來到我的個人網站！</h1>
-        <p>這是一個成功部署在 GitHub Pages 上的網站。</p>
-        <button id="btn-click">點我一下</button>
-    </section>
+        <!-- 輪播容器 -->
+        <div class="carousel-container">
+            <div class="carousel-slide">
+                <!-- 圖片 1：可替換為 images/photo1.jpg 或網路圖片 URL -->
+                <div class="slide">
+                    <img src="https://picsum.photos/id/1018/1000/500" alt="風景 1">
+                    <div class="caption">美麗的山林景色</div>
+                </div>
 
-    <!-- 關於我 -->
-    <section id="about" class="content-section">
-        <h2>關於我</h2>
-        <p>這裡可以寫一些關於你的介紹、專長或興趣。</p>
-    </section>
+                <!-- 圖片 2 -->
+                <div class="slide">
+                    <img src="https://picsum.photos/id/1015/1000/500" alt="風景 2">
+                    <div class="caption">壯麗的河谷湖泊</div>
+                </div>
 
-    <!-- 頁尾 -->
-    <footer>
-        <p>&copy; 2026 My Name. All Rights Reserved.</p>
-    </footer>
+                <!-- 圖片 3 -->
+                <div class="slide">
+                    <img src="https://picsum.photos/id/1019/1000/500" alt="風景 3">
+                    <div class="caption">神秘的海邊奇岩</div>
+                </div>
+            </div>
+
+            <!-- 左右控制按鈕 -->
+            <button class="prev-btn">&#10094;</button>
+            <button class="next-btn">&#10095;</button>
+
+            <!-- 下方指示點 -->
+            <div class="dots-container">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </main>
 
     <script src="script.js"></script>
 </body>
