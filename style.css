@@ -5,17 +5,17 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-/* 預設背景與平滑過渡動畫 */
+/* 預設背景與平滑過渡動畫 (Radial Gradient 中心向外擴散) */
 body {
-    background: linear-gradient(135deg, #EFECE6 0%, #E6EBE0 100%);
+    background: radial-gradient(circle at center, #F7DFB0 0%, #D4A373 100%);
     color: #2c3e50;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    transition: background 0.6s ease; /* 支援漸層與顏色的淡入淡出轉換 */
+    transition: background 0.6s ease;
 }
 
-/* 其餘 CSS 保持不變 */
+/* 頂部無邊框選單 */
 header {
     padding: 28px 0;
     display: flex;
@@ -59,6 +59,7 @@ nav {
     border-radius: 2px;
 }
 
+/* 主要內容區域 */
 main {
     flex: 1;
     position: relative;
@@ -81,6 +82,7 @@ main {
     opacity: 1;
 }
 
+/* 圖片輪換頁面 */
 #gallery-page {
     position: relative;
     width: 100%;
@@ -126,6 +128,7 @@ main {
     display: block;
 }
 
+/* 隱藏箭頭 (hover 時顯示) */
 .arrow-btn {
     position: absolute;
     top: 50%;
@@ -153,6 +156,7 @@ main {
 .arrow-prev { left: 2%; }
 .arrow-next { right: 2%; }
 
+/* 文字頁面 */
 #text-page {
     justify-content: center;
     align-items: center;
