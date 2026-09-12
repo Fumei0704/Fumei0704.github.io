@@ -1,120 +1,64 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* 1. 設定全站預設背景顏色 */
 body {
+    /* 單色背景：可以改成任何你喜歡的 Hex 色碼 */
+    background-color: #f0f4f8; 
+    
+    /* 
+       若想用「漸層背景」，可以把上面那行註解掉，改用下面這行：
+       background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+    */
+
     font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
-    background-color: #f4f6f8;
-    color: #333;
+    color: #333333; /* 主要文字顏色 */
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    margin: 0;
+    transition: background-color 0.5s ease; /* 讓背景顏色變化時有平滑過渡效果 */
 }
 
-.container {
-    width: 90%;
-    max-width: 900px;
-    text-align: center;
-}
-
-h1 {
-    margin-bottom: 20px;
-}
-
-/* 輪播主要區域 */
-.carousel-container {
-    position: relative;
-    overflow: hidden;
+/* 2. 主內容卡片（保持白底以凸顯文字） */
+.card {
+    background-color: #ffffff;
+    padding: 2.5rem;
     border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 450px;
+    width: 90%;
 }
 
-.carousel-slide {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
+.card h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #2c3e50;
 }
 
-.slide {
-    min-width: 100%;
-    position: relative;
+.card p {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
 }
 
-.slide img {
-    width: 100%;
-    height: 450px;
-    object-fit: cover; /* 確保圖片滿版且不變形 */
-    display: block;
-}
-
-/* 文字說明標籤 */
-.caption {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    background-color: rgba(0, 0, 0, 0.6);
-    color: #fff;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 1rem;
-}
-
-/* 左右切換按鈕 */
-.prev-btn, .next-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.4);
+/* 3. 按鈕樣式 */
+button {
+    background-color: #3498db;
     color: white;
     border: none;
-    font-size: 24px;
-    padding: 12px 16px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 6px;
     cursor: pointer;
-    border-radius: 50%;
     transition: background-color 0.3s;
-    user-select: none;
 }
 
-.prev-btn:hover, .next-btn:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+button:hover {
+    background-color: #2980b9;
 }
 
-.prev-btn { left: 15px; }
-.next-btn { right: 15px; }
-
-/* 下方指示圓點 */
-.dots-container {
-    position: absolute;
-    bottom: 15px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-}
-
-.dot {
-    width: 12px;
-    height: 12px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-.dot.active {
-    background-color: #fff;
-    transform: scale(1.2);
-}
-
-/* 手機版響應式微調 */
-@media (max-width: 600px) {
-    .slide img {
-        height: 250px;
-    }
-    .prev-btn, .next-btn {
-        padding: 8px 12px;
-        font-size: 18px;
-    }
+/* 4. 提供給 JavaScript 切換用的深色主題類別 */
+body.dark-theme {
+    background-color: #1e1e2e; /* 暗色主題背景 */
+    color: #ffffff;
 }
