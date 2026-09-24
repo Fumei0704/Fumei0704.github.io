@@ -1,45 +1,98 @@
-// 24 張圖片對應的背景色列表（由中心向外放射狀漸層，飽和度較高）
+// 24 張圖片對應的低飽和度背景色列表
 const backgroundColors = [
-    "radial-gradient(circle at center, #F7DFB0 0%, #D4A373 100%)", // 圖片 1：溫暖金杏
-    "radial-gradient(circle at center, #CDEAC0 0%, #7CB518 100%)", // 圖片 2：鮮活草綠
-    "radial-gradient(circle at center, #C8E7F5 0%, #5B92E5 100%)", // 圖片 3：湛藍湖水
-    "radial-gradient(circle at center, #FEE3B8 0%, #F1A208 100%)", // 圖片 4：亮麗琥珀
-    "radial-gradient(circle at center, #F3C4FB 0%, #B5179E 100%)", // 圖片 5：霓光淡紫
-    "radial-gradient(circle at center, #B8F2E6 0%, #38B000 100%)", // 圖片 6：清爽翡翠
-    "radial-gradient(circle at center, #FFCBF2 0%, #F72585 100%)", // 圖片 7：甜美玫紅
-    "radial-gradient(circle at center, #FFE5EC 0%, #FB6F92 100%)", // 圖片 8：繽紛珊瑚粉
-    "radial-gradient(circle at center, #E0AFA0 0%, #8A5A44 100%)", // 圖片 9：濃郁赤陶
-    "radial-gradient(circle at center, #D8F3DC 0%, #52B788 100%)", // 圖片 10：活力深綠
-    "radial-gradient(circle at center, #E1BEE7 0%, #8E24AA 100%)", // 圖片 11：夢幻紫色
-    "radial-gradient(circle at center, #BEE3F8 0%, #3182CE 100%)", // 圖片 12：海洋湛藍
-    "radial-gradient(circle at center, #E2E8F0 0%, #64748B 100%)", // 圖片 13：質感岩藍
-    "radial-gradient(circle at center, #FDE2E4 0%, #E07A5F 100%)", // 圖片 14：暖陽橙紅
-    "radial-gradient(circle at center, #CCD5AE 0%, #6B705C 100%)", // 圖片 15：橄欖綠
-    "radial-gradient(circle at center, #FFD6A5 0%, #FF9F1C 100%)", // 圖片 16：鮮明亮橙
-    "radial-gradient(circle at center, #E9D8A6 0%, #EE9B00 100%)", // 圖片 17：熾黃藤黃
-    "radial-gradient(circle at center, #94D2BD 0%, #0A9396 100%)", // 圖片 18：熱帶孔雀綠
-    "radial-gradient(circle at center, #E8AEB7 0%, #B80046 100%)", // 圖片 19：緋紅玫瑰
-    "radial-gradient(circle at center, #DDA15E 0%, #BC6C25 100%)", // 圖片 20：焦糖焦茶
-    "radial-gradient(circle at center, #C77DFF 0%, #7B2CBF 100%)", // 圖片 21：艷麗深紫
-    "radial-gradient(circle at center, #E0FAFF 0%, #00B4D8 100%)", // 圖片 22：明亮天藍
-    "radial-gradient(circle at center, #F4ACB7 0%, #9D8189 100%)", // 圖片 23：煙燻粉紫
-    "radial-gradient(circle at center, #E0E1DD 0%, #415A77 100%)"  // 圖片 24：深蔚藍灰
+    "#EFECE6",
+    "#E6EBE0",
+    "#EDF2F4",
+    "#F4EAD4",
+    "#F0E6EF",
+    "#E2ECE9",
+    "#EAE4E9",
+    "#FFF1E6",
+    "#FDE2E4",
+    "#DBE7E4",
+    "#E4C1F9",
+    "#D6E2E9",
+    "#E9ECEF",
+    "#F3E9DC",
+    "#D8E2DC",
+    "#FFE5D9",
+    "#ECE4DB",
+    "#E0E1DD",
+    "#F1FAEE",
+    "#E8D8CE",
+    "#DFE7FD",
+    "#F0F3F4",
+    "#EAD7D7",
+    "#DCE1E3"
 ];
 
+const siteMenu = document.getElementById('siteMenu');
+const menuToggle = document.getElementById('menuToggle');
+let menuCloseTimer;
+
+function openMenu() {
+    clearTimeout(menuCloseTimer);
+    if (!siteMenu.open) siteMenu.showModal();
+    document.body.classList.add('menu-open');
+    menuToggle.setAttribute('aria-expanded', 'true');
+    void siteMenu.offsetWidth;
+    siteMenu.classList.add('is-open');
+}
+
+function closeMenu() {
+    if (!siteMenu.open) return;
+    clearTimeout(menuCloseTimer);
+    siteMenu.classList.remove('is-open');
+    const delay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 280;
+    menuCloseTimer = setTimeout(() => siteMenu.close(), delay);
+}
+
+siteMenu.addEventListener('click', (event) => {
+    if (event.target === siteMenu) closeMenu();
+});
+siteMenu.addEventListener('cancel', (event) => {
+    event.preventDefault();
+    closeMenu();
+});
+siteMenu.addEventListener('close', () => {
+    clearTimeout(menuCloseTimer);
+    siteMenu.classList.remove('is-open');
+    document.body.classList.remove('menu-open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.focus({ preventScroll: true });
+});
+
 function switchPage(pageName) {
+    const targetPage = document.getElementById(`${pageName}-page`);
+    const targetButton = Array.from(document.querySelectorAll('.nav-btn')).find(btn => btn.dataset.page === pageName);
+    if (!targetPage || !targetButton) return;
+    // 隱藏輪播前完成定位，避免動畫中斷後無法繼續換圖。
+    if (isAnimating) {
+        currentIndex = getRealIndex() + 1;
+        slideTrack.classList.add('no-transition');
+        slideTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
+        void slideTrack.offsetWidth;
+        slideTrack.classList.remove('no-transition');
+        isAnimating = false;
+    }
+
     const pages = document.querySelectorAll('.page-content');
     const buttons = document.querySelectorAll('.nav-btn');
 
     pages.forEach(page => page.classList.remove('active'));
-    buttons.forEach(btn => btn.classList.remove('active'));
-
-    if (pageName === 'gallery') {
-        document.getElementById('gallery-page').classList.add('active');
-        buttons[0].classList.add('active');
-    } else if (pageName === 'text') {
-        document.getElementById('text-page').classList.add('active');
-        buttons[1].classList.add('active');
-    }
+    buttons.forEach(btn => {
+        btn.classList.remove('active');
+        btn.removeAttribute('aria-current');
+    });
+    targetPage.classList.add('active');
+    document.body.classList.toggle('text-page-active', pageName === 'text');
+    targetButton.classList.add('active');
+    targetButton.setAttribute('aria-current', 'page');
+    document.getElementById('currentPageLabel').textContent = {
+        gallery: '作品展示', text: '繪師資訊', planning: '籌畫細節'
+    }[pageName];
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    closeMenu();
 }
 
 /* =========================
@@ -86,11 +139,11 @@ function getRealIndex() {
 }
 
 /* =========================
-   更新背景色（Radial Gradient 中心向外擴散）
+   更新背景色
 ========================= */
 
 function updateBackgroundColor() {
-    document.body.style.background = backgroundColors[getRealIndex()];
+    document.body.style.backgroundColor = backgroundColors[getRealIndex()];
 }
 
 /* =========================
@@ -98,6 +151,7 @@ function updateBackgroundColor() {
 ========================= */
 
 function moveSlide(direction) {
+    /* 動畫還沒結束時不接受下一次操作，防止 index 跑掉 */
     if (isAnimating) {
         return;
     }
@@ -115,17 +169,21 @@ function moveSlide(direction) {
 ========================= */
 
 slideTrack.addEventListener('transitionend', (event) => {
+    /* 只監聽 transform 動畫 */
     if (event.propertyName !== 'transform') {
         return;
     }
 
+    /* 24 → 假 1：動畫結束後瞬間跳到真正的 1 */
     if (currentIndex === totalSlides + 1) {
         slideTrack.classList.add('no-transition');
         currentIndex = 1;
         slideTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
         void slideTrack.offsetWidth;
         slideTrack.classList.remove('no-transition');
-    } else if (currentIndex === 0) {
+    }
+    /* 1 → 假 24：動畫結束後瞬間跳到真正的 24 */
+    else if (currentIndex === 0) {
         slideTrack.classList.add('no-transition');
         currentIndex = totalSlides;
         slideTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
@@ -134,6 +192,8 @@ slideTrack.addEventListener('transitionend', (event) => {
     }
 
     updateBackgroundColor();
+
+    /* 動畫結束，重新允許操作 */
     isAnimating = false;
 });
 
@@ -158,12 +218,17 @@ carouselViewport.addEventListener('touchend', (event) => {
     const deltaX = touchEndX - touchStartX;
     const deltaY = touchEndY - touchStartY;
 
+    /* 至少滑動 50px 才判定為有效手勢 */
     const swipeThreshold = 50;
 
+    /* 水平距離必須大於 50px 且大於垂直距離，避免上下滑頁面時誤切圖片 */
     if (Math.abs(deltaX) > swipeThreshold && Math.abs(deltaX) > Math.abs(deltaY)) {
+        /* 往左滑 → 下一張 */
         if (deltaX < 0) {
             moveSlide(1);
-        } else {
+        }
+        /* 往右滑 → 上一張 */
+        else {
             moveSlide(-1);
         }
     }
